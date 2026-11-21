@@ -1570,7 +1570,7 @@ static NSString *MSGB(uint64_t b) { return [NSString stringWithFormat:@"%.1f GB"
     [_storeBtn setTitle:@"Download from Steam, GOG or Epic…" forState:UIControlStateNormal];
     [_storeBtn addTarget:self action:@selector(storeTapped) forControlEvents:UIControlEventTouchUpInside];
     _storeBtn.hidden = NSClassFromString(@"MSStoreUI") == nil;
-    UIStackView *st = [[UIStackView alloc] initWithArrangedSubviews:@[ title, _info, _storeBtn, _importBtn, _bar, _status ]];   /* no "play from SSD": import only */
+    UIStackView *st = [[UIStackView alloc] initWithArrangedSubviews:@[ title, _info, _storeBtn, _importBtn, _ssdBtn, _bar, _status ]];
     st.axis = UILayoutConstraintAxisVertical; st.spacing = 20; st.translatesAutoresizingMaskIntoConstraints = NO; [self.view addSubview:st];
     [NSLayoutConstraint activateConstraints:@[
         [st.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor], [st.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
@@ -1582,6 +1582,7 @@ static NSString *MSGB(uint64_t b) { return [NSString stringWithFormat:@"%.1f GB"
           @"It is copied to this iPhone (about 61 GB). Keep the app open while it copies.\n\n"
           @"You can also copy the \"Cyberpunk 2077\" folder yourself with the Files app into On My iPhone > this app.";
     [_importBtn setTitle:resume ? @"Continue import" : @"Import game…" forState:UIControlStateNormal];
+    _ssdBtn.hidden = resume;
 }
 - (void)importTapped {
     if (_copying) return;
